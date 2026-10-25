@@ -1,0 +1,505 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/* Motive House Theme */
+:root {
+  --ink: #171615;
+  --muted: #77716c;
+  --paper: #f8f6f2;
+  --white: #fffdfa;
+  --line: #e7e1da;
+  --red: #8f1931;
+  --red-dark: #741328;
+  --serif: #c8b7a5;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer components {
+  .section {
+    @apply mx-auto max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:px-16 lg:py-28;
+  }
+
+  .eyebrow {
+    @apply inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-[#871D34];
+  }
+
+  .eyebrow.light {
+    @apply text-[#D3A6AE];
+  }
+
+  .button {
+    @apply inline-flex items-center justify-center gap-3 px-6 py-4 text-sm font-semibold transition-colors;
+  }
+
+  .button-red {
+    @apply bg-[#871D34] text-white hover:bg-[#701428];
+  }
+
+  .button-outline {
+    @apply border border-[#871D34] px-5 py-3 text-sm font-semibold text-[#871D34] transition-colors hover:bg-[#871D34] hover:text-white;
+  }
+
+  .hero {
+    @apply relative flex min-h-[540px] items-center overflow-hidden bg-[#171615] px-6 py-20 text-[#FFFDFA] md:px-12 lg:px-20;
+    background-image: linear-gradient(90deg, rgb(23 22 21 / 96%) 0%, rgb(23 22 21 / 78%) 55%, rgb(23 22 21 / 35%) 100%), url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=85");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .hero-graphic {
+    background-image: linear-gradient(90deg, rgb(23 22 21 / 96%) 0%, rgb(23 22 21 / 78%) 55%, rgb(23 22 21 / 35%) 100%), url("https://images.unsplash.com/photo-1634942536790-2531a0b7b9a6?auto=format&fit=crop&w=1800&q=85");
+  }
+
+  .hero-social {
+    background-image: linear-gradient(90deg, rgb(23 22 21 / 96%) 0%, rgb(23 22 21 / 78%) 55%, rgb(23 22 21 / 35%) 100%), url("https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1800&q=85");
+  }
+
+  .hero-accounting,
+  .hero-tax {
+    background-image: linear-gradient(90deg, rgb(23 22 21 / 96%) 0%, rgb(23 22 21 / 78%) 55%, rgb(23 22 21 / 35%) 100%), url("/images/accounting-desk.jpg");
+  }
+
+  .hero-copy {
+    @apply relative z-10 max-w-3xl;
+  }
+
+  .hero h1 {
+    @apply mt-6 max-w-3xl text-4xl font-medium leading-tight md:text-6xl;
+  }
+
+  .hero-copy > p {
+    @apply mt-6 max-w-2xl text-base leading-8 text-white/75 md:text-lg;
+  }
+
+  .hero-actions {
+    @apply mt-8 flex flex-wrap items-center gap-5;
+  }
+
+  .play-link {
+    @apply inline-flex items-center gap-3 text-sm text-white/90 transition-colors hover:text-[#D3A6AE];
+  }
+
+  .hero-side-note {
+    @apply absolute right-8 top-1/2 hidden -translate-y-1/2 text-right text-[10px] font-semibold leading-7 tracking-[0.2em] text-white/60 lg:block;
+  }
+
+  .stats-strip {
+    @apply grid grid-cols-2 border-b border-[#E7E1DA] bg-[#FFFDFA] px-5 py-7 sm:grid-cols-4 lg:grid-cols-5 lg:px-12;
+  }
+
+  .stat {
+    @apply flex flex-col gap-1 border-r border-[#E7E1DA] px-4 py-3 last:border-r-0;
+  }
+
+  .stat strong {
+    @apply text-2xl font-semibold text-[#871D34] md:text-3xl;
+  }
+
+  .stat span,
+  .trusted small {
+    @apply text-xs text-[#77716C];
+  }
+
+  .trusted {
+    @apply col-span-2 mt-4 flex flex-col justify-center gap-3 border-t border-[#E7E1DA] px-4 pt-5 sm:col-span-4 lg:col-span-1 lg:mt-0 lg:border-l lg:border-t-0 lg:pt-3;
+  }
+
+  .trusted > div {
+    @apply flex flex-wrap gap-x-3 text-[10px] font-bold tracking-wider text-[#171615];
+  }
+
+  .trusted > div span {
+    @apply text-[#871D34];
+  }
+
+  .section-heading {
+    @apply mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end;
+  }
+
+  .section-heading h2,
+  .overview-copy h2,
+  .value-copy h2,
+  .results-strip h2,
+  .testimonial-title h2,
+  .contact-intro h2 {
+    @apply mt-4 text-3xl font-medium leading-tight text-[#171615] md:text-5xl;
+  }
+
+  .section-heading p,
+  .overview-copy > p,
+  .contact-intro > p {
+    @apply mt-4 max-w-2xl text-sm leading-7 text-[#77716C] md:text-base;
+  }
+
+  .text-link {
+    @apply inline-flex shrink-0 items-center gap-3 text-sm font-semibold text-[#871D34] transition-colors hover:text-[#701428];
+  }
+
+  .overview-section {
+    @apply grid gap-10 lg:grid-cols-[0.9fr_1fr_0.55fr] lg:items-center;
+  }
+
+  .overview-image,
+  .value-image {
+    @apply min-h-[300px] bg-cover bg-center;
+    background-image: linear-gradient(135deg, rgb(23 22 21 / 10%), rgb(23 22 21 / 20%)), url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85");
+  }
+
+  .overview-social,
+  .value-social {
+    background-image: linear-gradient(135deg, rgb(23 22 21 / 10%), rgb(23 22 21 / 20%)), url("https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=85");
+  }
+
+  .overview-accounting,
+  .overview-tax,
+  .value-accounting,
+  .value-tax {
+    background-image: linear-gradient(135deg, rgb(23 22 21 / 10%), rgb(23 22 21 / 20%)), url("/images/accounting-desk.jpg");
+  }
+
+  .overview-stat {
+    @apply grid grid-cols-2 gap-5 border-t border-[#E7E1DA] pt-5 lg:grid-cols-1 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0;
+  }
+
+  .overview-stat strong {
+    @apply flex flex-col gap-1 text-2xl font-semibold text-[#871D34];
+  }
+
+  .overview-stat small {
+    @apply text-xs font-normal text-[#77716C];
+  }
+
+  .service-detail-section {
+    @apply max-w-none bg-[#EEE9E1];
+  }
+
+  .service-detail-section > .section-heading,
+  .service-detail-section > .detail-service-grid {
+    @apply mx-auto max-w-7xl;
+  }
+
+  .detail-service-grid {
+    @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .detail-service {
+    @apply relative min-h-56 border border-[#E7E1DA] bg-[#FFFDFA] p-6 transition-transform hover:-translate-y-1 md:p-8;
+  }
+
+  .detail-icon {
+    @apply mb-6 flex h-11 w-11 items-center justify-center bg-[#F3E8E8] text-[#871D34];
+  }
+
+  .detail-service h3 {
+    @apply text-lg font-semibold text-[#171615];
+  }
+
+  .detail-service p {
+    @apply mt-3 text-sm leading-6 text-[#77716C];
+  }
+
+  .detail-service > a {
+    @apply absolute bottom-6 right-6 text-[#871D34];
+  }
+
+  .value-section {
+    @apply grid gap-10 lg:grid-cols-2 lg:items-center;
+  }
+
+  .value-image {
+    @apply min-h-[360px];
+  }
+
+  .value-copy ul {
+    @apply my-7 space-y-4;
+  }
+
+  .value-copy li {
+    @apply flex items-center gap-3 text-sm text-[#5F5954];
+  }
+
+  .value-copy li svg {
+    @apply h-5 w-5 shrink-0 text-[#871D34];
+  }
+
+  .heading-aside {
+    @apply max-w-md text-sm leading-7 text-[#77716C];
+  }
+
+  .process-grid {
+    @apply grid border-t border-[#E7E1DA] sm:grid-cols-2 lg:grid-cols-4;
+  }
+
+  .process-step {
+    @apply flex gap-5 border-b border-[#E7E1DA] py-6 lg:border-r lg:px-5 lg:first:pl-0 lg:last:border-r-0;
+  }
+
+  .process-step > b {
+    @apply text-xs font-semibold text-[#871D34];
+  }
+
+  .process-step h3 {
+    @apply font-semibold text-[#171615];
+  }
+
+  .process-step p {
+    @apply mt-2 text-sm leading-6 text-[#77716C];
+  }
+
+  .service-work-grid {
+    @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .project-card {
+    @apply relative flex min-h-64 items-end justify-between overflow-hidden bg-[#282522] p-6 text-white md:min-h-80 md:p-8;
+    background-image: linear-gradient(0deg, rgb(23 22 21 / 85%), rgb(23 22 21 / 5%));
+  }
+
+  .project-card > div {
+    @apply relative z-10;
+  }
+
+  .project-card h3 {
+    @apply text-lg font-semibold;
+  }
+
+  .project-card p {
+    @apply mt-2 text-xs text-white/70;
+  }
+
+  .round-arrow {
+    @apply relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/60 transition-colors group-hover:bg-[#871D34];
+  }
+
+  .project-one { background-color: #5a4037; }
+  .project-two { background-color: #634750; }
+  .project-three { background-color: #354b4a; }
+  .project-four { background-color: #6a563f; }
+  .project-five { background-color: #4d4a5c; }
+  .project-six { background-color: #42504a; }
+
+  .results-strip {
+    @apply border-y border-[#E7E1DA] bg-[#FFFDFA];
+  }
+
+  .results-grid {
+    @apply mt-8 grid grid-cols-2 gap-6 sm:grid-cols-4;
+  }
+
+  .results-grid > div {
+    @apply flex flex-col gap-2 border-l-2 border-[#871D34] pl-4;
+  }
+
+  .results-grid strong {
+    @apply text-2xl font-semibold text-[#871D34] md:text-3xl;
+  }
+
+  .results-grid span {
+    @apply text-xs text-[#77716C];
+  }
+
+  .testimonial-section {
+    @apply grid gap-6 bg-[#EEE9E1] md:grid-cols-2 lg:grid-cols-[0.8fr_1fr_1fr];
+  }
+
+  .testimonial-title {
+    @apply md:col-span-2 lg:col-span-1;
+  }
+
+  .testimonial {
+    @apply border border-[#E7E1DA] bg-[#FFFDFA] p-6 md:p-8;
+  }
+
+  .testimonial > svg {
+    @apply h-6 w-6 text-[#871D34];
+  }
+
+  .testimonial > p {
+    @apply mt-5 text-sm leading-7 text-[#5F5954];
+  }
+
+  .client {
+    @apply mt-6 flex items-center gap-3 border-t border-[#E7E1DA] pt-5;
+  }
+
+  .client > div:nth-child(2) {
+    @apply flex flex-1 flex-col gap-1 text-sm;
+  }
+
+  .client small {
+    @apply text-xs text-[#77716C];
+  }
+
+  .avatar {
+    @apply flex h-10 w-10 items-center justify-center rounded-full bg-[#F3E8E8] text-xs font-semibold text-[#871D34];
+  }
+
+  .stars {
+    @apply text-xs text-[#871D34];
+  }
+
+  .cta-banner {
+    @apply flex flex-col items-start justify-between gap-8 bg-[#171615] px-6 py-16 text-white md:flex-row md:items-center md:px-12 lg:px-20;
+  }
+
+  .cta-banner h2 {
+    @apply mt-4 max-w-3xl text-3xl font-medium leading-tight md:text-5xl;
+  }
+
+  .cta-banner p {
+    @apply mt-4 text-sm text-white/70 md:text-base;
+  }
+
+  .contact-section {
+    @apply grid gap-10 lg:grid-cols-[0.8fr_1.2fr];
+  }
+
+  .contact-intro > a {
+    @apply mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#871D34];
+  }
+
+  .contact-form {
+    @apply space-y-5 border border-[#E7E1DA] bg-[#FFFDFA] p-5 md:p-8;
+  }
+
+  .form-row {
+    @apply grid gap-5 sm:grid-cols-2;
+  }
+
+  .contact-form label {
+    @apply block space-y-2 text-xs font-semibold text-[#171615];
+  }
+
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    @apply w-full border border-[#E7E1DA] bg-[#F8F6F2] px-4 py-3 text-sm font-normal text-[#171615] outline-none transition-colors placeholder:text-[#A59A8F] focus:border-[#871D34];
+  }
+
+  .contact-form textarea {
+    @apply resize-y;
+  }
+
+  .form-note {
+    @apply flex items-center gap-2 text-sm text-[#5F5954];
+  }
+
+  .site-header {
+    @apply border-b border-[#E7E1DA] bg-[#F8F6F2];
+  }
+
+  .brand {
+    @apply inline-flex flex-col font-bold leading-none tracking-[0.18em] text-[#171615];
+  }
+
+  .brand small {
+    @apply mt-1 text-[9px] font-medium tracking-[0.35em] text-[#871D34];
+  }
+
+  .footer {
+    @apply bg-[#171615] px-5 py-12 text-white md:px-10 lg:px-16;
+  }
+
+  .footer-main {
+    @apply mx-auto grid max-w-7xl gap-10 sm:grid-cols-2 lg:grid-cols-4;
+  }
+
+  .footer-main > div {
+    @apply flex flex-col items-start gap-3;
+  }
+
+  .footer .brand {
+    @apply text-white;
+  }
+
+  .footer-brand p,
+  .footer-contact p {
+    @apply mt-3 text-sm leading-6 text-white/65;
+  }
+
+  .footer-main h4 {
+    @apply mb-2 text-xs font-bold uppercase tracking-[0.15em] text-[#D3A6AE];
+  }
+
+  .footer-main a:not(.brand) {
+    @apply text-sm text-white/70 transition-colors hover:text-white;
+  }
+
+  .footer-contact p,
+  .footer-contact > a {
+    @apply flex items-center gap-2;
+  }
+
+  .footer-contact p span {
+    @apply ml-6;
+  }
+
+  .social-links {
+    @apply mt-3 flex gap-3;
+  }
+
+  .social-links a {
+    @apply flex h-9 w-9 items-center justify-center border border-white/20;
+  }
+
+  .social-links svg {
+    @apply h-4 w-4;
+  }
+
+  .footer-bottom {
+    @apply mx-auto mt-10 flex max-w-7xl flex-col justify-between gap-4 border-t border-white/15 pt-5 text-xs text-white/60 sm:flex-row;
+  }
+
+  .footer-bottom > div {
+    @apply flex flex-wrap gap-x-5 gap-y-2;
+  }
+
+  .footer-bottom a {
+    @apply inline-flex items-center gap-1;
+  }
+
+  .not-found {
+    @apply mx-auto flex min-h-[65vh] max-w-7xl flex-col items-start justify-center px-5 py-20 md:px-10 lg:px-16;
+  }
+
+  .not-found h1 {
+    @apply mt-5 max-w-3xl text-4xl font-medium leading-tight md:text-6xl;
+  }
+
+  .not-found p {
+    @apply my-6 max-w-xl text-base leading-7 text-[#77716C];
+  }
+}
