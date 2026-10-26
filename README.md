@@ -4,6 +4,8 @@ A responsive multi-page Next.js 14 website inspired by the supplied Motive House
 
 ## Pages included
 - `/` — Home page
+- `/contact` — Contact and project inquiry form
+- `/admin/inquiries` — Password-protected inquiry dashboard
 - `/services/graphic-design` — Graphic Design
 - `/services/social-media` — Social Media Management
 - `/services/bookkeeping-accounting` — Bookkeeping & Accounting
@@ -11,7 +13,7 @@ A responsive multi-page Next.js 14 website inspired by the supplied Motive House
 - Custom 404 page
 
 ## Run locally
-1. Install Node.js 20 LTS (or a compatible current LTS).
+1. Install Node.js 20.19 or newer (or a compatible current LTS).
 2. Extract the ZIP and open the extracted `motive-house-nextjs` folder in VS Code.
 3. Open Terminal in that folder and run:
    ```bash
@@ -27,7 +29,14 @@ npm start
 ```
 
 ## Important setup notes
-- This is a frontend starter; the contact form opens the visitor's default email app using a `mailto:` link. It does not store enquiries in a database or send email in the background. Connect an email provider/API before production if you need a true contact system.
+- Contact inquiries are stored in MongoDB. Configure these server-only environment variables locally (`.env.local`) and in the Vercel project's Production environment before enabling submissions:
+  - `MONGODB_URI` — MongoDB connection string for the inquiry database.
+  - `ADMIN_PASSWORD` — A strong, unique password for `/admin/inquiries`.
+  - `ADMIN_SESSION_SECRET` — At least 32 random characters used to sign the secure admin session cookie. Generate one with `node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"`.
+  - `WHATSAPP_BUSINESS_NUMBER` — Optional business number in international format, digits only (for example, `15551234567`). The WhatsApp contact option is hidden until configured.
+- Restart the development server after changing `.env.local`. In MongoDB Atlas, allow connections from the deployment environment and use a database user with only the permissions the site needs. Never prefix these values with `NEXT_PUBLIC_`.
+- If `MONGODB_URI` is missing or the database is unavailable, the inquiry form reports an error and does not show a success message. Contact inquiries are not emailed automatically; configure an email provider separately if email notifications are required.
+- The admin dashboard uses an HTTP-only, signed, same-site session cookie. Set both admin environment variables before using it. The built-in IP rate limit is per running application instance; use a shared rate-limiting service for deployments that need limits shared across serverless instances.
 - The brand name, colors, page copy, navigation, cards, testimonials, and contact details are easy to customize in `lib/site-data.ts`, `components/`, and `app/globals.css`.
 - Contact details and sample testimonials are placeholders. Replace them with the client's real details before launch.
 - The visual references use warm office, brand-design, social-media, and accounting photography. Replace the CSS image backgrounds with licensed client imagery when available. The site has CSS-generated visual panels so the layout remains usable before real images are added.

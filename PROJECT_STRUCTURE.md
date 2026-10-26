@@ -10,6 +10,10 @@
 - `components/SiteFooter.tsx` — Footer and quick links
 - `components/HomePage.tsx` — Homepage sections
 - `components/ServicePage.tsx` — Shared service page component
-- `components/ContactForm.tsx` — Email-app contact enquiry form
+- `components/ContactForm.tsx` — Accessible contact inquiry form
+- `components/AdminInquiries.tsx` — Password-protected inquiry dashboard UI
+- `app/api/contact/route.ts` — Validates and saves contact inquiries
+- `app/api/admin/` — Protected admin sign-in, inquiry, and status APIs
+- `lib/models/Inquiry.ts` — MongoDB inquiry model
 - `lib/site-data.ts` — Shared service copy and page data
 - `public/images/` — Temporary reference crops for visual backgrounds

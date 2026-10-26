@@ -9,6 +9,7 @@ import Link from "next/link";
 import {
   ArrowLeft, ArrowRight, ArrowUpRight, BarChart3, Instagram, Monitor, PenTool, Palette, Play,
 } from "lucide-react";
+import { ContactForm } from "@/components/ContactForm";
 
 /* ------------------------------------------------------------------
    IMAGES: replace any URL with your own file (e.g. "/images/hero.jpg").
@@ -37,11 +38,25 @@ const stats = [
 
 /* Services carousel: the five from the reference, linked to your pages */
 const services = [
-  { t: "Tax&Accounts", d: "Professional tax and accounting services.", Icon: PenTool, href: "/services/tax-accounting" },
-  { t: "Social Media Management", d: "Consistent content and community growth.", Icon: Instagram, href: "/services/social-media-management" },
-  { t: "Book-keeping", d: "Accurate bookkeeping to keep your finances clear and organised.", Icon: BarChart3, href: "/services/book-keeping" },
-  { t: "Web Design & Development", d: "Modern websites that convert.", Icon: Monitor, href: "/services/web-design" },
-  { t: "Graphic Design", d: "Scroll-stopping visuals for your brand.", Icon: Palette, href: "/services/graphic-design" },
+  // { t: "Tax&Accounts", d: "Professional tax and accounting services.", Icon: PenTool, href: "/services/tax-accounting" },
+  // { t: "Social Media Management", d: "Consistent content and community growth.", Icon: Instagram, href: "/services/social-media-management" },
+  // { t: "Book-keeping", d: "Accurate bookkeeping to keep your finances clear and organised.", Icon: BarChart3, href: "/services/book-keeping" },
+  // { t: "Web Design & Development", d: "Modern websites that convert.", Icon: Monitor, href: "/services/web-design" },
+  // { t: "Graphic Design", d: "Scroll-stopping visuals for your brand.", Icon: Palette, href: "/services/graphic-design" },
+
+  
+{ t: "Social Media Management", d: "Consistent content and community growth.", Icon: Instagram, href: "/services/social-media-management" },
+
+{ t: "Graphic Design", d: "Scroll-stopping visuals for your brand.", Icon: Palette, href: "/services/graphic-design" },
+
+{ t: "Book-keeping", d: "Accurate bookkeeping to keep your finances clear and organised.", Icon: BarChart3, href: "/services/book-keeping" },
+
+
+{ t: "Web Design & Development", d: "Modern websites that convert.", Icon: Monitor, href: "/services/web-design" },
+{ t: "Tax & Accounts", d: "Professional tax and accounting services.", Icon: PenTool, href: "/services/tax-accounting" },
+
+
+
 ];
 const business = [
   { t: "Bookkeeping & Accounting", d: "Accurate bookkeeping to keep your finances clear and organised.", img: IMG.bookkeeping, href: "/services/bookkeeping" },
@@ -498,6 +513,41 @@ export default function HomePage() {
             <p className="mb-9 max-w-[400px] text-base leading-7 text-white/70">Let&apos;s create something meaningful for your business.</p>
             <a href="mailto:support@motivehouse.co" className={solid}>Let&apos;s Talk <ArrowRight size={16} className={arrowCls} /></a>
           </Reveal>
+        </div>
+      </section>
+
+      {/* ================= CONTACT ================= */}
+      <section
+        id="contact"
+        aria-labelledby="homepage-contact-title"
+        className="bg-[#f5eee8]"
+      >
+        <div className={`${wrap} grid items-start gap-8 py-16 sm:py-20 lg:grid-cols-[0.75fr_1.25fr] lg:gap-14 lg:py-24`}>
+          <Reveal>
+            <p className="text-[10px] font-semibold uppercase tracking-[4px] text-[#8b2332]">
+              Let&apos;s talk
+            </p>
+            <h2
+              id="homepage-contact-title"
+              className="mt-4 max-w-lg text-3xl font-medium leading-tight tracking-[-0.04em] text-[#6b1a2b] sm:text-4xl md:text-5xl"
+            >
+              Have an idea? Let&apos;s make it matter.
+            </h2>
+            <p className="mt-5 max-w-md text-sm leading-7 text-[#1a0b0f]/70 sm:text-base">
+              Tell us a little about your business and what you&apos;re looking
+              to create. We&apos;ll be in touch to explore the right next step.
+            </p>
+            <a
+              href="mailto:support@motivehouse.co"
+              className="mt-6 inline-flex text-sm font-semibold text-[#8b2332] underline decoration-[#8b2332]/30 underline-offset-4 transition-colors hover:text-[#6b1a2b] hover:decoration-[#6b1a2b]"
+            >
+              support@motivehouse.co
+            </a>
+          </Reveal>
+          <ContactForm
+            title="Send us a message"
+            description="Share a few details and our team will get back to you."
+          />
         </div>
       </section>
     </main>
