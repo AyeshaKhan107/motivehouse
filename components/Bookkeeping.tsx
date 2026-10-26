@@ -24,7 +24,7 @@ const IMG = {
   faq: U("photo-1497215728101-856f4ea42174", 900),
   cta: U("photo-1486406146926-c627a92ad1ab", 1400),
 };
-const EMAIL_PAGE = "/mailto:support@motivehouse.co";
+const EMAIL_PAGE = "mailto:support@motivehouse.co";
 
 const stats = [
   { n: 7, s: "", l: "Core services" },
@@ -226,7 +226,7 @@ export default function BookkeepingPage() {
             Reliable bookkeeping and accounting support for small businesses across the United States and Canada, so records stay organised and tax time gets easier.
           </p>
           <div className={`flex flex-wrap items-center gap-6 opacity-0 ${mounted ? "[animation:bkRise_.9s_.9s_forwards]" : ""}`}>
-            <Link href={EMAIL_PAGE} className={solidD}>Let&apos;s Talk <ArrowRight size={16} className={arrowCls} /></Link>
+            <a href={EMAIL_PAGE} className={solidD}>Let&apos;s Talk <ArrowRight size={16} className={arrowCls} /></a>
             {/* <Link href="#p" className="group inline-flex items-center gap-3 text-sm font-medium text-white/85 hover:text-white">
               <span className="relative grid h-10 w-10 place-items-center rounded-full border border-white/40 transition group-hover:border-[#c4506a] group-hover:bg-[#6b1a2b]">
                 <span className="absolute inset-0 rounded-full border border-white/40 [animation:bkGlow_2.4s_ease-in-out_infinite]" /><Play size={13} fill="currentColor" />
@@ -292,7 +292,7 @@ export default function BookkeepingPage() {
             <p className={eyebrow}>More than just bookkeeping</p>
             <h2 className="mt-4 text-3xl font-medium leading-tight tracking-[-0.04em] md:text-4xl">Clear Records. Better Decisions.</h2>
             <p className="mb-6 mt-4 text-sm leading-7 text-[#6f6366]">When books fall behind, cash flow, profitability and tax prep all get harder to see. Our outsourced bookkeeping gives you a clearer view of your numbers and a consistent process for keeping records up to date.</p>
-            <Link href={EMAIL_PAGE} className={solid}>Let&apos;s Talk <ArrowRight size={15} className={arrowCls} /></Link>
+            <a href={EMAIL_PAGE} className={solid}>Let&apos;s Talk <ArrowRight size={15} className={arrowCls} /></a>
           </Reveal>
           <Reveal delay={0.12}>
             <Photo src={IMG.focus} alt="Calculator and financial documents" className="aspect-[1.2/1] shadow-2xl shadow-black/20" imgClass="brightness-[.78] [animation:bkZoom_24s_ease-in-out_infinite_alternate]" />
@@ -360,7 +360,7 @@ export default function BookkeepingPage() {
                 ))}
               </ul>
               <p className="mb-7 mt-0 text-xs leading-5 text-[#f4eee6]/60">{m.scope}</p>
-              <Link href={EMAIL_PAGE} className={solidD}>{m.cta} <ArrowRight size={15} className={arrowCls} /></Link>
+              <a href={EMAIL_PAGE} className={solidD}>{m.cta} <ArrowRight size={15} className={arrowCls} /></a>
             </div>
             <div className="relative min-h-[320px] overflow-hidden border border-[#f4eee6]/15">
               <Photo src={m.img} alt={mode === "US" ? "United States city skyline" : "Canadian city skyline"} className="absolute inset-0" imgClass="brightness-[.6] [animation:bkZoom_24s_ease-in-out_infinite_alternate]" />
@@ -515,7 +515,7 @@ export default function BookkeepingPage() {
             <p className="text-[10px] font-semibold uppercase tracking-[4px] text-white/60">Let&apos;s work together</p>
             <h2 className="mb-4 mt-5 max-w-[560px] text-4xl font-medium leading-[1.05] tracking-[-0.045em] md:text-6xl">Ready for Clearer Books<span className="text-[#a8283f]">?</span></h2>
             <p className="mb-8 max-w-[400px] text-sm leading-7 text-white/70">Schedule a discovery call. Not sure what you need? We&apos;ll help define the first practical step.</p>
-            <Link href={EMAIL_PAGE} className={solidD}>Let&apos;s Talk <ArrowRight size={16} className={arrowCls} /></Link>
+            <a href={EMAIL_PAGE} className={solidD}>Let&apos;s Talk <ArrowRight size={16} className={arrowCls} /></a>
           </Reveal>
         </div>
       </section>

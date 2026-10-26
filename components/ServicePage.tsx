@@ -201,7 +201,7 @@ export default function ServicePage() {
               From building your website to strengthening your online presence, Motive House brings design, technology and strategy together to help your business move forward.
             </p>
             <div className={`mt-8 flex flex-wrap gap-4 o0 opacity-0 ${mounted ? "[animation:rise_.9s_.9s_forwards]" : ""}`}>
-              <Link href="/mailto:support@motivehouse.co" className="group inline-flex items-center gap-3 rounded-full bg-[var(--maroon)] px-6 py-3.5 text-[13px] font-bold text-[color:var(--cream)] transition duration-300 hover:-translate-y-1 hover:bg-[var(--red)]">Discuss Your Project<ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" /></Link>
+              <a href="mailto:support@motivehouse.co" className="group inline-flex items-center gap-3 rounded-full bg-[var(--maroon)] px-6 py-3.5 text-[13px] font-bold text-[color:var(--cream)] transition duration-300 hover:-translate-y-1 hover:bg-[var(--red)]">Discuss Your Project<ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" /></a>
               <a href="#services" className="group inline-flex items-center gap-3 rounded-full border border-[color:var(--maroon)] px-6 py-3.5 text-[13px] font-bold text-[color:var(--maroon)] transition duration-300 hover:-translate-y-1 hover:bg-[var(--maroon)] hover:text-[color:var(--cream)]">Explore Services<ArrowUpRight size={16} /></a>
             </div>
           </div>
@@ -249,9 +249,9 @@ export default function ServicePage() {
             <h2 className={`m-0 mb-3 max-w-[640px] ${serif} text-[clamp(2.1rem,4.6vw,3.4rem)] font-medium leading-[1.12]`}>Have a project in mind?<br />Let&apos;s make it happen.</h2>
             <p className="m-0 text-sm leading-7 text-[color:#ead8d3]">Tell us what you&apos;re working on and let&apos;s explore how we can help.</p>
           </div>
-          <Link href="/mailto:support@motivehouse.co" className="group inline-flex items-center gap-3 rounded-full bg-[var(--cream)] px-7 py-4 text-[13px] font-bold text-[color:var(--maroon)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-14px_rgba(0,0,0,.6)]">
+          <a href="mailto:support@motivehouse.co" className="group inline-flex items-center gap-3 rounded-full bg-[var(--cream)] px-7 py-4 text-[13px] font-bold text-[color:var(--maroon)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-14px_rgba(0,0,0,.6)]">
             Start a Conversation<ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
+          </a>
         </div>
       </section>
     </main>

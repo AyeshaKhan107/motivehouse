@@ -900,7 +900,7 @@ export default function TaxAccountingPage() {
             <p className="mb-8 mt-0 max-w-[460px] text-sm leading-6 text-[color:var(--mu)]">{SERVICES_INTRO.foot}</p>
             <div ref={mag} className="inline-flex items-center gap-5 transition-transform duration-200 ease-out">
               {/* <Cta>{HERO.primary}</Cta> */}
-              <span className="text-sm text-[color:var(--mu)]">{EMAIL}</span>
+              <a href={`mailto:${EMAIL}`} className="text-sm text-[color:var(--mu)]">{EMAIL}</a>
             </div>
           </div>
         </div>

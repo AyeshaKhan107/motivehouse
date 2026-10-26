@@ -1098,7 +1098,7 @@ export default function WebDesign() {
           </a>
 
           <p className="mt-6 text-sm opacity-70">
-            {EMAIL} ·{" "}
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a> ·{" "}
             <Link href="/#services" className="underline underline-offset-4">
               See all services
             </Link>

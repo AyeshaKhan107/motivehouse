@@ -1045,7 +1045,7 @@ export default function GraphicDesignPage() {
             <a href={`mailto:${EMAIL}?subject=Design%20project`} className={`${btn} !py-2 !pl-7 !pr-2 text-base`}>Start a project<i className={`${dot} !h-11 !w-11`}><ArrowUpRight size={20} /></i></a>
             <a href={PORTFOLIO_PDF} download="motive-house-portfolio.pdf" className={ghost}><Download size={15} />Download portfolio (PDF)</a>
           </div>
-          <p className="mb-0 mt-6 text-sm text-[color:var(--mu)]">{EMAIL}</p>
+          <a href={`mailto:${EMAIL}`} className="mb-0 mt-6 block text-sm text-[color:var(--mu)]">{EMAIL}</a>
         </div>
       </section>
     </main>

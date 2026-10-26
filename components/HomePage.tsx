@@ -296,7 +296,7 @@ export default function HomePage() {
             We turn ideas into meaningful brands, digital experiences and measurable growth.
           </p>
           <div className={`flex flex-wrap items-center gap-6 opacity-0 ${mounted ? "[animation:mhRise_.9s_.9s_forwards]" : ""}`}>
-            <Link href="/mailto:support@motivehouse.co" className={solid}>Let&apos;s Talk <ArrowRight size={16} className={arrowCls} /></Link>
+            <a href="mailto:support@motivehouse.co" className={solid}>Let&apos;s Talk <ArrowRight size={16} className={arrowCls} /></a>
             <Link href="#services" className="group inline-flex items-center gap-3 text-sm font-medium text-white/85 hover:text-white">
               <span className="relative grid h-10 w-10 place-items-center rounded-full border border-white/40 transition group-hover:border-[#c9566d] group-hover:bg-[#871D34]">
                 <span className="absolute inset-0 rounded-full border border-white/40 [animation:mhGlow_2.4s_ease-in-out_infinite]" /><Play size={13} fill="currentColor" />
@@ -496,7 +496,7 @@ export default function HomePage() {
             <p className="text-[10px] font-semibold uppercase tracking-[4px] text-white/60">Let&apos;s work together</p>
             <h2 className="mb-5 mt-5 max-w-[620px] text-4xl font-medium leading-[1.05] tracking-[-0.045em] md:text-6xl">Ready to Make Your Ideas Matter<span className="text-[#c9314f]">?</span></h2>
             <p className="mb-9 max-w-[400px] text-base leading-7 text-white/70">Let&apos;s create something meaningful for your business.</p>
-            <Link href="/mailto:support@motivehouse.co" className={solid}>Let&apos;s Talk <ArrowRight size={16} className={arrowCls} /></Link>
+            <a href="mailto:support@motivehouse.co" className={solid}>Let&apos;s Talk <ArrowRight size={16} className={arrowCls} /></a>
           </Reveal>
         </div>
       </section>
