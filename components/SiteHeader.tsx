@@ -64,6 +64,12 @@ const HEADER_CSS = `
 @keyframes hdrPop{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
 `;
 
+/*
+  RESPONSIVE MAP (only change from the original):
+  - below 768px (phones)  : hamburger + mobile menu
+  - 768px to 1023px       : full desktop nav, shown as a second row under the logo / button
+  - 1024px and up         : single row; compact spacing at 1024-1279px, original spacing from 1280px
+*/
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -85,6 +91,19 @@ export function SiteHeader() {
 
   /* close on route change */
   useEffect(() => { closeMenu(); }, [pathname]);
+
+  /* if the screen grows past the phone breakpoint, close the mobile menu and release the scroll lock */
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onChange = (e: MediaQueryListEvent) => {
+      if (e.matches) {
+        setOpen(false);
+        setOtherOpen(false);
+      }
+    };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   /* scroll state + reading progress */
   useEffect(() => {
@@ -122,8 +141,9 @@ export function SiteHeader() {
   const enter = () => { if (timer.current) clearTimeout(timer.current); setDd(true); };
   const leave = () => { timer.current = setTimeout(() => setDd(false), 140); };
 
+  /* 13px on 1024-1279px so everything fits on one row; original 13.5px from 1280px */
   const linkCls = (active: boolean) =>
-    `group/link relative whitespace-nowrap py-2 text-[13.5px] font-medium transition-colors duration-200 ${active ? "text-[#8b2332]" : "text-[#1a0b0f] hover:text-[#8b2332]"}`;
+    `group/link relative whitespace-nowrap py-2 text-[13px] font-medium transition-colors duration-200 xl:text-[13.5px] ${active ? "text-[#8b2332]" : "text-[#1a0b0f] hover:text-[#8b2332]"}`;
   const underline = (active: boolean) =>
     `absolute inset-x-0 -bottom-0.5 h-[2px] origin-left rounded-full bg-[#8b2332] transition-transform duration-300 ${active ? "scale-x-100" : "scale-x-0 group-hover/link:scale-x-100"}`;
 
@@ -136,9 +156,9 @@ export function SiteHeader() {
     >
       <style>{HEADER_CSS}</style>
 
-      <div className={`mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 transition-[padding] duration-300 lg:px-8 ${scrolled ? "py-2.5" : "py-4"}`}>
+      <div className={`mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-6 px-5 transition-[padding] duration-300 lg:flex-nowrap lg:px-8 ${scrolled ? "py-2.5" : "py-4"}`}>
         {/* Footer-style Motive House Logo (unchanged) */}
-        <Link href="/" onClick={closeMenu} aria-label="Motive House home" className="group inline-flex shrink-0 items-center gap-2.5">
+        <Link href="/" onClick={closeMenu} aria-label="Motive House home" className="group order-1 inline-flex shrink-0 items-center gap-2.5">
           <LogoMark />
 
           <span className="flex flex-col leading-none">
@@ -147,8 +167,11 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        {/* Desktop navigation */}
-        <nav aria-label="Main navigation" className="hidden items-center gap-7 xl:flex">
+        {/* Desktop navigation: visible from 768px. Second row on tablets, centred row item from 1024px */}
+        <nav
+          aria-label="Main navigation"
+          className="hidden items-center justify-center gap-x-7 md:order-3 md:mt-3 md:flex md:w-full md:basis-full md:border-t md:border-black/[0.06] md:pt-2.5 lg:order-2 lg:mt-0 lg:w-auto lg:basis-auto lg:gap-x-[18px] lg:border-0 lg:pt-0 xl:gap-x-7"
+        >
           {mainLinks.map((link) => {
             const active = isActive(link.href);
             return (
@@ -175,7 +198,7 @@ export function SiteHeader() {
             </button>
 
             {dd && (
-              <div id="other-services-menu" role="menu" className="absolute right-0 top-full z-50 w-[380px] pt-4 [animation:hdrPop_.22s_ease-out_both]">
+              <div id="other-services-menu" role="menu" className="absolute right-0 top-full z-50 w-[380px] max-w-[calc(100vw-2.5rem)] pt-4 [animation:hdrPop_.22s_ease-out_both]">
                 <div className="relative overflow-hidden rounded-2xl border border-black/10 bg-[#fffdf9] shadow-[0_28px_60px_-24px_rgba(26,11,15,0.45)]">
                   <span aria-hidden="true" className="absolute -top-1.5 right-10 h-3 w-3 rotate-45 border-l border-t border-black/10 bg-[#fffdf9]" />
 
@@ -208,7 +231,7 @@ export function SiteHeader() {
                     })}
                   </div>
 
-                  <Link href="/servicespages" role="menuitem" onClick={closeMenu} className="flex items-center justify-between border-t border-black/[0.07] bg-[#f5eee8]/60 px-5 py-3.5 text-sm font-semibold text-[#8b2332] transition-colors hover:bg-[#f5eee8] hover:text-[#6f1926]">
+                  <Link href="/servicespage" role="menuitem" onClick={closeMenu} className="flex items-center justify-between border-t border-black/[0.07] bg-[#f5eee8]/60 px-5 py-3.5 text-sm font-semibold text-[#8b2332] transition-colors hover:bg-[#f5eee8] hover:text-[#6f1926]">
                     View all services <ArrowRight size={15} />
                   </Link>
                 </div>
@@ -217,16 +240,16 @@ export function SiteHeader() {
           </div>
         </nav>
 
-        {/* Desktop contact button */}
-        <Link className="button button-red group hidden shrink-0 items-center gap-2 xl:inline-flex" href="mailto:support@motivehouse.co">
+        {/* Desktop contact button (visible from 768px) */}
+        <Link className="button button-red group hidden shrink-0 items-center gap-2 md:order-2 md:inline-flex lg:order-3" href="mailto:support@motivehouse.co">
           Let&apos;s Talk <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
         </Link>
 
-        {/* Mobile menu button */}
+        {/* Mobile menu button: phones only (below 768px) */}
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-black/10 transition-colors hover:bg-[#8b2332] hover:text-white xl:hidden"
+          className="order-2 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-black/10 transition-colors hover:bg-[#8b2332] hover:text-white md:hidden"
           aria-label={open ? "Close navigation" : "Open navigation"}
           aria-expanded={open}
           aria-controls="mobile-nav"
@@ -235,10 +258,10 @@ export function SiteHeader() {
         </button>
       </div>
 
-      {/* Mobile navigation */}
+      {/* Mobile navigation: phones only */}
       <div
         id="mobile-nav"
-        className={`absolute left-0 right-0 top-full overflow-y-auto border-t border-black/10 bg-[#fffdf9] shadow-xl transition-[max-height,opacity] duration-300 xl:hidden ${
+        className={`absolute left-0 right-0 top-full overflow-y-auto border-t border-black/10 bg-[#fffdf9] shadow-xl transition-[max-height,opacity] duration-300 md:hidden ${
           open ? "visible max-h-[calc(100vh-72px)] opacity-100" : "invisible max-h-0 opacity-0"
         }`}
       >
