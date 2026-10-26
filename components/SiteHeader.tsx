@@ -1,6 +1,3 @@
-
-
-
 "use client";
 
 import Link from "next/link";
@@ -211,7 +208,7 @@ export function SiteHeader() {
                     })}
                   </div>
 
-                  <Link href="/servicespage" role="menuitem" onClick={closeMenu} className="flex items-center justify-between border-t border-black/[0.07] bg-[#f5eee8]/60 px-5 py-3.5 text-sm font-semibold text-[#8b2332] transition-colors hover:bg-[#f5eee8] hover:text-[#6f1926]">
+                  <Link href="/servicespages" role="menuitem" onClick={closeMenu} className="flex items-center justify-between border-t border-black/[0.07] bg-[#f5eee8]/60 px-5 py-3.5 text-sm font-semibold text-[#8b2332] transition-colors hover:bg-[#f5eee8] hover:text-[#6f1926]">
                     View all services <ArrowRight size={15} />
                   </Link>
                 </div>
@@ -286,7 +283,7 @@ export function SiteHeader() {
                   </Link>
                 );
               })}
-              <Link href="/services" onClick={closeMenu} className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-[#8b2332]">
+              <Link href="/servicespages" onClick={closeMenu} className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-[#8b2332]">
                 View all services →
               </Link>
             </div>
