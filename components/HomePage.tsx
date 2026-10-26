@@ -296,8 +296,8 @@ export default function HomePage() {
             We turn ideas into meaningful brands, digital experiences and measurable growth.
           </p>
           <div className={`flex flex-wrap items-center gap-6 opacity-0 ${mounted ? "[animation:mhRise_.9s_.9s_forwards]" : ""}`}>
-            <Link href="/contact" className={solid}>Let&apos;s Talk <ArrowRight size={16} className={arrowCls} /></Link>
-            <Link href="#work" className="group inline-flex items-center gap-3 text-sm font-medium text-white/85 hover:text-white">
+            <Link href="/mailto:support@motivehouse.co" className={solid}>Let&apos;s Talk <ArrowRight size={16} className={arrowCls} /></Link>
+            <Link href="#services" className="group inline-flex items-center gap-3 text-sm font-medium text-white/85 hover:text-white">
               <span className="relative grid h-10 w-10 place-items-center rounded-full border border-white/40 transition group-hover:border-[#c9566d] group-hover:bg-[#871D34]">
                 <span className="absolute inset-0 rounded-full border border-white/40 [animation:mhGlow_2.4s_ease-in-out_infinite]" /><Play size={13} fill="currentColor" />
               </span>
@@ -343,7 +343,7 @@ export default function HomePage() {
             <h2 className="mt-4 text-3xl font-medium tracking-[-0.04em] md:text-5xl">Creative &amp; Digital Services</h2>
             <p className="mt-3 text-sm text-[#77716C]">Everything you need to build, grow and scale your brand online.</p>
           </div>
-          <Link href="/services" className="group inline-flex items-center gap-2 text-xs font-bold text-[#871D34]">View all services <ArrowRight size={14} className={arrowCls} /></Link>
+          <Link href="/servicespage" className="group inline-flex items-center gap-2 text-xs font-bold text-[#871D34]">View all services <ArrowRight size={14} className={arrowCls} /></Link>
         </Reveal>
         <Reveal delay={0.1}><ServicesCarousel /></Reveal>
       </section>
@@ -355,7 +355,7 @@ export default function HomePage() {
             <p className={eyebrow}>Business services</p>
             <h2 className="mt-4 text-3xl font-medium leading-tight tracking-[-0.04em] md:text-5xl">Support for a Stronger Business</h2>
             <p className="mb-5 mt-4 max-w-[340px] text-sm leading-6 text-[#77716C]">Keep your business organized, compliant and ready for growth.</p>
-            <Link href="/services" className="group inline-flex items-center gap-2 text-xs font-bold text-[#871D34]">View all business services <ArrowRight size={14} className={arrowCls} /></Link>
+            <Link href="/servicespage" className="group inline-flex items-center gap-2 text-xs font-bold text-[#871D34]">View all business services <ArrowRight size={14} className={arrowCls} /></Link>
           </Reveal>
           <div className="grid gap-4 sm:grid-cols-2">
             {business.map(({ t, d, img, href }, i) => (
@@ -496,7 +496,7 @@ export default function HomePage() {
             <p className="text-[10px] font-semibold uppercase tracking-[4px] text-white/60">Let&apos;s work together</p>
             <h2 className="mb-5 mt-5 max-w-[620px] text-4xl font-medium leading-[1.05] tracking-[-0.045em] md:text-6xl">Ready to Make Your Ideas Matter<span className="text-[#c9314f]">?</span></h2>
             <p className="mb-9 max-w-[400px] text-base leading-7 text-white/70">Let&apos;s create something meaningful for your business.</p>
-            <Link href="/contact" className={solid}>Let&apos;s Talk <ArrowRight size={16} className={arrowCls} /></Link>
+            <Link href="/mailto:support@motivehouse.co" className={solid}>Let&apos;s Talk <ArrowRight size={16} className={arrowCls} /></Link>
           </Reveal>
         </div>
       </section>
