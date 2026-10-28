@@ -259,7 +259,7 @@ export default function SocialMediaPage() {
       <div aria-hidden="true" className="fixed inset-x-0 top-0 z-50 h-[3px] origin-left bg-gradient-to-r from-[#6b1a2b] to-[#e4a0ae]" style={{ transform: `scaleX(${prog})` }} />
 
       {/* ============ HERO (dark) ============ */}
-      <section data-tone={T("dark")} className={`${band} relative isolate overflow-hidden px-5 pb-24 pt-24 sm:px-8 sm:pt-28`}>
+      {/* <section data-tone={T("dark")} className={`${band} relative isolate overflow-hidden px-5 pb-24 pt-24 sm:px-8 sm:pt-28`}>
         <div className="absolute inset-0 -z-10">
           <Photo src={IMG.hero} alt="Creative workspace" className="h-full w-full" imgClass="[animation:smZoom_24s_ease-in-out_infinite_alternate]" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#120d0d] via-[#120d0d]/80 to-[#120d0d]/40" />
@@ -276,12 +276,103 @@ export default function SocialMediaPage() {
             </h1>
             <p className={`mt-7 max-w-[440px] text-base leading-7 text-[color:var(--mu)] opacity-0 sm:text-lg ${mounted ? "[animation:smRise_.9s_.7s_forwards]" : ""}`}>Strategic content, engaging communities and data-driven campaigns to grow your brand online.</p>
           </div>
+
           <Phone />
         </div>
         <ul className="absolute bottom-10 right-8 z-10 m-0 hidden list-none flex-col gap-1.5 p-0 text-[9px] font-semibold uppercase tracking-[0.35em] text-[color:var(--mu)] xl:flex">
           <li className="mb-2 h-px w-8 bg-[var(--mu)]" />{words.map((w) => (<li key={w}>{w}</li>))}
         </ul>
-      </section>
+      </section> */}
+
+
+<section
+  data-tone={T("dark")}
+  className={`${band} relative isolate overflow-hidden px-5 pb-24 pt-24 sm:px-8 sm:pt-28`}
+>
+  <div className="absolute inset-0 -z-10">
+    <Photo
+      src={IMG.hero}
+      alt="Creative workspace"
+      className="h-full w-full"
+      imgClass="[animation:smZoom_24s_ease-in-out_infinite_alternate]"
+    />
+
+    <div className="absolute inset-0 bg-gradient-to-r from-[#120d0d] via-[#120d0d]/80 to-[#120d0d]/40" />
+
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(255,186,110,.24),transparent_55%)] [animation:smGlow_6s_ease-in-out_infinite]" />
+  </div>
+
+  <button
+    type="button"
+    onClick={toggle}
+    aria-label="Swap light and dark sections"
+    className="absolute right-5 top-5 z-10 grid h-9 w-9 place-items-center rounded-full border border-[color:var(--ln)] bg-[var(--sf)] transition duration-500 hover:rotate-180 hover:bg-[var(--ac)] sm:right-8"
+  >
+    {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+  </button>
+
+  <div className={`${wrap} grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]`}>
+    <div>
+      <p
+        className={`mb-6 text-[10px] font-semibold uppercase tracking-[4px] text-[color:var(--mu)] opacity-0 ${
+          mounted ? "[animation:smRise_.8s_.1s_forwards]" : ""
+        }`}
+      >
+        Social media management
+      </p>
+
+      <h1 className="m-0 text-[clamp(2.8rem,6.8vw,5.6rem)] font-medium leading-[1] tracking-[-0.05em]">
+        <span className="block overflow-hidden pb-[0.08em]">
+          <span className={line} style={{ animationDelay: ".15s" }}>
+            Social Media
+          </span>
+        </span>
+
+        <span className="block overflow-hidden pb-[0.08em]">
+          <span className={line} style={{ animationDelay: ".3s" }}>
+            That Drives
+          </span>
+        </span>
+
+        <span className="block overflow-hidden pb-[0.08em]">
+          <span className={line} style={{ animationDelay: ".45s" }}>
+            Real Growth
+            <span className="text-[color:var(--ac)]">.</span>
+          </span>
+        </span>
+      </h1>
+
+      <p
+        className={`mt-7 max-w-[440px] text-base leading-7 text-[color:var(--mu)] opacity-0 sm:text-lg ${
+          mounted ? "[animation:smRise_.9s_.7s_forwards]" : ""
+        }`}
+      >
+        Strategic content, engaging communities and data-driven campaigns to
+        grow your brand online.
+      </p>
+
+      <Link
+        href="/portfolio/motive-house-portfolio.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-8 inline-flex items-center gap-2 rounded-full border border-[#8b2332] bg-[#8b2332] px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#6b1a2b] hover:shadow-lg"
+      >
+        View Portfolio
+        <ArrowUpRight size={16} />
+      </Link>
+    </div>
+
+    <Phone />
+  </div>
+
+  <ul className="absolute bottom-10 right-8 z-10 m-0 hidden list-none flex-col gap-1.5 p-0 text-[9px] font-semibold uppercase tracking-[0.35em] text-[color:var(--mu)] xl:flex">
+    <li className="mb-2 h-px w-8 bg-[var(--mu)]" />
+    {words.map((w) => (
+      <li key={w}>{w}</li>
+    ))}
+  </ul>
+</section>
+
 
       {/* ticker */}
       <section data-tone={T("light2")} className={`${band} overflow-hidden border-b border-[color:var(--ln)] py-5`} aria-hidden="true">
@@ -297,7 +388,7 @@ export default function SocialMediaPage() {
             <p className={eyebrow}>Overview</p>
             <h2 className={`${h2} mt-4`}>More Than Posting. A Complete Strategy.</h2>
             <p className="mb-7 mt-5 max-w-[380px] text-sm leading-7 text-[color:var(--mu)]">We create and manage social media strategies that build brand awareness, increase engagement and drive measurable results.</p>
-            <Cta href={CONSULT_HREF} outline>Get a Free Consultation</Cta>
+            <Cta href="/booking" outline>Get a Free Consultation</Cta>
           </Reveal>
           <Reveal delay={0.12}>
             <Photo src={IMG.overview} alt="Social media on a phone" className="aspect-[1.05/1] shadow-2xl shadow-black/25" imgClass="brightness-[.8] [animation:smZoom_26s_ease-in-out_infinite_alternate]" />
@@ -486,7 +577,7 @@ export default function SocialMediaPage() {
                 </li>
               ))}
             </ul>
-            <Cta>Let&apos;s Talk</Cta>
+            <Cta href="mailto:support@motivehouse.co">Let&apos;s Talk</Cta>
           </Reveal>
         </div>
       </section>
@@ -502,7 +593,7 @@ export default function SocialMediaPage() {
           <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-medium tracking-wide"><MessageCircle size={15} />Let&apos;s work together</p>
           <h2 className="m-0 max-w-[620px] text-[clamp(2.2rem,5.4vw,4.2rem)] font-semibold leading-[1.04] tracking-[-0.04em]">Ready to Grow<br />Your Brand Online?</h2>
           <p className="mb-9 mt-5 max-w-[460px] text-sm leading-7 text-white/75 sm:text-base">Let&apos;s create a social media strategy that gets real results, and a presence that feels authentic to your business.</p>
-          <Link href="/contact" className="group inline-flex items-center gap-3 bg-[#f6f2ec] px-7 py-4 text-sm font-semibold text-[#6b1a2b] transition duration-300 hover:-translate-y-1 hover:shadow-xl">Let&apos;s Talk<ArrowRight size={16} className="transition-transform group-hover:translate-x-1" /></Link>
+          <Link href="mailto:support@motivehouse.co" className="group inline-flex items-center gap-3 bg-[#f6f2ec] px-7 py-4 text-sm font-semibold text-[#6b1a2b] transition duration-300 hover:-translate-y-1 hover:shadow-xl">Let&apos;s Talk<ArrowRight size={16} className="transition-transform group-hover:translate-x-1" /></Link>
         </Reveal>
       </section>
     </main>

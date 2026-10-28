@@ -34,6 +34,7 @@ export async function connectToDatabase() {
   if (!cache.promise) {
     cache.promise = mongoose.connect(uri, {
       bufferCommands: false,
+      dbName: "MotiveHouse",
       serverSelectionTimeoutMS: 8000,
     });
   }

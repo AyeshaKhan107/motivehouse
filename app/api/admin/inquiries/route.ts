@@ -1,3 +1,4 @@
+import { isValidObjectId } from "mongoose";
 import { NextResponse } from "next/server";
 import {
   hasAdminSession,
@@ -107,6 +108,47 @@ export async function PATCH(request: Request) {
     console.error("Unable to update inquiry status:", error);
     return NextResponse.json(
       { message: "Unable to update inquiry. Please try again." },
+      { status: 503 },
+    );
+  }
+}
+
+export async function DELETE(request: Request) {
+  if (!isSameOriginRequest(request)) {
+    return NextResponse.json({ message: "Request could not be verified." }, { status: 403 });
+  }
+  if (!hasAdminSession()) {
+    return NextResponse.json({ message: "Sign in to delete inquiries." }, { status: 401 });
+  }
+
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ message: "Invalid delete request." }, { status: 400 });
+  }
+
+  if (
+    typeof body !== "object" ||
+    body === null ||
+    !("id" in body) ||
+    typeof body.id !== "string" ||
+    !isValidObjectId(body.id)
+  ) {
+    return NextResponse.json({ message: "Select a valid inquiry." }, { status: 400 });
+  }
+
+  try {
+    await connectToDatabase();
+    const deleted = await Inquiry.findByIdAndDelete(body.id).select("_id").lean();
+    if (!deleted) {
+      return NextResponse.json({ message: "Inquiry not found." }, { status: 404 });
+    }
+    return NextResponse.json({ deleted: true });
+  } catch {
+    console.error("Unable to delete contact inquiry.");
+    return NextResponse.json(
+      { message: "Unable to delete inquiry. Please try again." },
       { status: 503 },
     );
   }

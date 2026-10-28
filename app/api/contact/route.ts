@@ -97,6 +97,7 @@ export async function POST(request: Request) {
   const firstName = readString(body.firstName, 50, true);
   const lastName = readString(body.lastName, 50, true);
   const email = readString(body.email, 254, true);
+  const phone = readString(body.phone, 40, true);
   const service = readString(body.service, 60, true);
   const details = readString(body.details, 5000, true);
 
@@ -105,6 +106,7 @@ export async function POST(request: Request) {
     lastName === null ||
     email === null ||
     !emailPattern.test(email) ||
+    phone === null ||
     service === null ||
     !INQUIRY_SERVICES.includes(
       service as (typeof INQUIRY_SERVICES)[number],
@@ -123,6 +125,7 @@ export async function POST(request: Request) {
       firstName,
       lastName,
       email,
+      phone,
       service,
       details,
     });
@@ -133,13 +136,11 @@ export async function POST(request: Request) {
       },
       { status: 201 },
     );
-  } catch (error) {
-    console.error("Unable to save contact inquiry:", error);
+  } catch {
+    console.error("Unable to save contact inquiry.");
     return NextResponse.json(
       {
-        message: process.env.MONGODB_URI
-          ? "We couldn’t save your inquiry right now. Please email support@motivehouse.co."
-          : "Inquiry submission is not configured yet. Please email support@motivehouse.co.",
+        message: "We couldn’t submit your message right now. Please try again.",
       },
       { status: 503 },
     );

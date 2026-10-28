@@ -34,7 +34,7 @@ const inquirySchema = new Schema(
     lastName: { type: String, required: true, trim: true, maxlength: 50 },
     name: { type: String, trim: true, maxlength: 100, default: "" },
     email: { type: String, required: true, trim: true, lowercase: true, maxlength: 254 },
-    phone: { type: String, trim: true, maxlength: 40, default: "" },
+    phone: { type: String, required: true, trim: true, maxlength: 40 },
     company: { type: String, trim: true, maxlength: 120, default: "" },
     service: { type: String, required: true, enum: INQUIRY_SERVICES },
     budget: { type: String, enum: [...INQUIRY_BUDGETS, ""], default: "" },
@@ -48,4 +48,5 @@ inquirySchema.index({ createdAt: -1 });
 inquirySchema.index({ email: 1, createdAt: -1 });
 
 export const Inquiry =
-  models.Inquiry || model("Inquiry", inquirySchema);
+  models.ContactInquiry ||
+  model("ContactInquiry", inquirySchema, "Contact");

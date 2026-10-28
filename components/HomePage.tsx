@@ -46,13 +46,9 @@ const services = [
 
   
 { t: "Social Media Management", d: "Consistent content and community growth.", Icon: Instagram, href: "/services/social-media-management" },
-
 { t: "Graphic Design", d: "Scroll-stopping visuals for your brand.", Icon: Palette, href: "/services/graphic-design" },
-
-{ t: "Book-keeping", d: "Accurate bookkeeping to keep your finances clear and organised.", Icon: BarChart3, href: "/services/book-keeping" },
-
-
 { t: "Web Design & Development", d: "Modern websites that convert.", Icon: Monitor, href: "/services/web-design" },
+{ t: "Book-keeping", d: "Accurate bookkeeping to keep your finances clear and organised.", Icon: BarChart3, href: "/services/book-keeping" },
 { t: "Tax & Accounts", d: "Professional tax and accounting services.", Icon: PenTool, href: "/services/tax-accounting" },
 
 
@@ -311,7 +307,8 @@ export default function HomePage() {
             We turn ideas into meaningful brands, digital experiences and measurable growth.
           </p>
           <div className={`flex flex-wrap items-center gap-6 opacity-0 ${mounted ? "[animation:mhRise_.9s_.9s_forwards]" : ""}`}>
-            <a href="mailto:support@motivehouse.co" className={solid}>Let&apos;s Talk <ArrowRight size={16} className={arrowCls} /></a>
+            <Link href="/booking" className={solid}>Book a Consultation <ArrowRight size={16} className={arrowCls} /></Link>
+            {/* <a href="mailto:support@motivehouse.co" className="group inline-flex items-center gap-3 text-sm font-medium text-white/85 transition hover:text-white">Let&apos;s Talk <ArrowRight size={16} className={arrowCls} /></a> */}
             <Link href="#services" className="group inline-flex items-center gap-3 text-sm font-medium text-white/85 hover:text-white">
               <span className="relative grid h-10 w-10 place-items-center rounded-full border border-white/40 transition group-hover:border-[#c9566d] group-hover:bg-[#871D34]">
                 <span className="absolute inset-0 rounded-full border border-white/40 [animation:mhGlow_2.4s_ease-in-out_infinite]" /><Play size={13} fill="currentColor" />
@@ -375,7 +372,7 @@ export default function HomePage() {
           <div className="grid gap-4 sm:grid-cols-2">
             {business.map(({ t, d, img, href }, i) => (
               <Reveal key={t} delay={i * 0.12}>
-                <Link href={href} className="group grid h-full grid-cols-[0.8fr_1fr] overflow-hidden border border-[#DDD5CA] bg-[#FFFDFA] transition duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
+                <Link href={""} className="group grid h-full grid-cols-[0.8fr_1fr] overflow-hidden border border-[#DDD5CA] bg-[#FFFDFA] transition duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
                   <Photo src={img} alt={t} className="min-h-[170px]" imgClass="transition-transform duration-700 group-hover:scale-110" />
                   <div className="flex flex-col justify-between p-5">
                     <div>

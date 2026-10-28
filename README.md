@@ -29,12 +29,12 @@ npm start
 ```
 
 ## Important setup notes
-- Contact inquiries are stored in MongoDB. Configure these server-only environment variables locally (`.env.local`) and in the Vercel project's Production environment before enabling submissions:
-  - `MONGODB_URI` — MongoDB connection string for the inquiry database.
+- Copy `.env.example` to `.env.local` and configure these server-only environment variables locally and in each Vercel environment that should accept inquiries:
+  - `MONGODB_URI` — MongoDB Atlas connection string. The app explicitly selects database `MotiveHouse`, regardless of a database name in the URI.
   - `ADMIN_PASSWORD` — A strong, unique password for `/admin/inquiries`.
   - `ADMIN_SESSION_SECRET` — At least 32 random characters used to sign the secure admin session cookie. Generate one with `node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"`.
   - `WHATSAPP_BUSINESS_NUMBER` — Optional business number in international format, digits only (for example, `15551234567`). The WhatsApp contact option is hidden until configured.
-- Restart the development server after changing `.env.local`. In MongoDB Atlas, allow connections from the deployment environment and use a database user with only the permissions the site needs. Never prefix these values with `NEXT_PUBLIC_`.
+- Contact submissions are stored in the `Contact` collection in `MotiveHouse`. Restart the development server after changing `.env.local`. In MongoDB Atlas, allow connections from the deployment environment and use a database user with only the permissions the site needs. Never prefix these values with `NEXT_PUBLIC_`.
 - If `MONGODB_URI` is missing or the database is unavailable, the inquiry form reports an error and does not show a success message. Contact inquiries are not emailed automatically; configure an email provider separately if email notifications are required.
 - The admin dashboard uses an HTTP-only, signed, same-site session cookie. Set both admin environment variables before using it. The built-in IP rate limit is per running application instance; use a shared rate-limiting service for deployments that need limits shared across serverless instances.
 - The brand name, colors, page copy, navigation, cards, testimonials, and contact details are easy to customize in `lib/site-data.ts`, `components/`, and `app/globals.css`.

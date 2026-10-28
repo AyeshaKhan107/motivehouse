@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState, type FormEvent } from "react";
-import { LogOut, Search } from "lucide-react";
+import { LoaderCircle, LogOut, Search, Trash2 } from "lucide-react";
 
 const statuses = ["New", "Contacted", "In Progress", "Completed"] as const;
 type InquiryStatus = (typeof statuses)[number];
@@ -32,25 +32,32 @@ export function AdminInquiries() {
   const [search, setSearch] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const loadInquiries = useCallback(async () => {
-    const query = new URLSearchParams();
-    if (status) query.set("status", status);
-    if (search.trim()) query.set("q", search.trim());
-    const response = await fetch(`/api/admin/inquiries?${query.toString()}`, {
-      cache: "no-store",
-    });
-    const result = (await response.json()) as {
-      inquiries?: Inquiry[];
-      message?: string;
-    };
-    if (!response.ok) {
-      if (response.status === 401) setAuthenticated(false);
-      throw new Error(result.message || "Unable to load inquiries.");
+    setIsLoading(true);
+    try {
+      const query = new URLSearchParams();
+      if (status) query.set("status", status);
+      if (search.trim()) query.set("q", search.trim());
+      const response = await fetch(`/api/admin/inquiries?${query.toString()}`, {
+        cache: "no-store",
+      });
+      const result = (await response.json()) as {
+        inquiries?: Inquiry[];
+        message?: string;
+      };
+      if (!response.ok) {
+        if (response.status === 401) setAuthenticated(false);
+        throw new Error(result.message || "Unable to load inquiries.");
+      }
+      setAuthenticated(true);
+      setInquiries(result.inquiries || []);
+      setError("");
+    } finally {
+      setIsLoading(false);
     }
-    setAuthenticated(true);
-    setInquiries(result.inquiries || []);
-    setError("");
   }, [search, status]);
 
   useEffect(() => {
@@ -117,6 +124,41 @@ export function AdminInquiries() {
           ? updateError.message
           : "Unable to update inquiry.",
       );
+    }
+  }
+
+  async function deleteInquiry(inquiry: Inquiry) {
+    const name =
+      [inquiry.firstName, inquiry.lastName].filter(Boolean).join(" ") ||
+      inquiry.name ||
+      inquiry.email;
+    if (!window.confirm(`Delete the inquiry from ${name}? This cannot be undone.`)) {
+      return;
+    }
+
+    setDeletingId(inquiry._id);
+    setError("");
+    try {
+      const response = await fetch("/api/admin/inquiries", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: inquiry._id }),
+      });
+      const result = (await response.json()) as { message?: string };
+      if (!response.ok) {
+        throw new Error(result.message || "Unable to delete inquiry.");
+      }
+      setInquiries((current) =>
+        current.filter((item) => item._id !== inquiry._id),
+      );
+    } catch (deleteError) {
+      setError(
+        deleteError instanceof Error
+          ? deleteError.message
+          : "Unable to delete inquiry.",
+      );
+    } finally {
+      setDeletingId(null);
     }
   }
 
@@ -229,22 +271,35 @@ export function AdminInquiries() {
             )}
 
             <div className="mt-6 space-y-4">
-              {inquiries.length === 0 ? (
+              {isLoading ? (
+                <div
+                  role="status"
+                  className="flex items-center justify-center gap-2 rounded-2xl border border-[#6b1a2b]/10 bg-white p-8 text-sm text-[#1a0b0f]/60"
+                >
+                  <LoaderCircle size={17} className="animate-spin" aria-hidden="true" />
+                  Loading inquiries…
+                </div>
+              ) : inquiries.length === 0 ? (
                 <div className="rounded-2xl border border-dashed border-[#6b1a2b]/20 bg-white p-8 text-center text-sm text-[#1a0b0f]/60">
                   No inquiries match your filters.
                 </div>
               ) : (
-                inquiries.map((inquiry) => (
-                  <article
-                    key={inquiry._id}
-                    className="rounded-2xl border border-[#6b1a2b]/10 bg-white p-5 shadow-[0_12px_36px_-30px_rgba(26,11,15,0.45)] sm:p-6"
-                  >
+                inquiries.map((inquiry) => {
+                  const name =
+                    [inquiry.firstName, inquiry.lastName]
+                      .filter(Boolean)
+                      .join(" ") ||
+                    inquiry.name ||
+                    "Unnamed inquiry";
+                  return (
+                    <article
+                      key={inquiry._id}
+                      className="rounded-2xl border border-[#6b1a2b]/10 bg-white p-5 shadow-[0_12px_36px_-30px_rgba(26,11,15,0.45)] sm:p-6"
+                    >
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                       <div className="min-w-0">
                         <h2 className="break-words text-lg font-semibold text-[#6b1a2b]">
-                          {[inquiry.firstName, inquiry.lastName]
-                            .filter(Boolean)
-                            .join(" ") || inquiry.name || "Unnamed inquiry"}
+                          {name}
                         </h2>
                         <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm text-[#1a0b0f]/65">
                           <a
@@ -275,6 +330,20 @@ export function AdminInquiries() {
                           ))}
                         </select>
                       </label>
+                      <button
+                        type="button"
+                        onClick={() => deleteInquiry(inquiry)}
+                        disabled={deletingId === inquiry._id}
+                        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#8b2332]/20 px-4 py-2 text-sm font-semibold text-[#8b2332] transition hover:bg-[#8b2332]/5 disabled:cursor-wait disabled:opacity-60"
+                        aria-label={`Delete inquiry from ${name}`}
+                      >
+                        {deletingId === inquiry._id ? (
+                          <LoaderCircle size={16} className="animate-spin" aria-hidden="true" />
+                        ) : (
+                          <Trash2 size={16} aria-hidden="true" />
+                        )}
+                        Delete
+                      </button>
                     </div>
                     <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold">
                       <span className="rounded-full bg-[#f5eee8] px-3 py-1.5 text-[#6b1a2b]">
@@ -291,9 +360,14 @@ export function AdminInquiries() {
                         </span>
                       )}
                     </div>
-                    <p className="mt-4 whitespace-pre-wrap break-words text-sm leading-7 text-[#1a0b0f]/80">
-                      {inquiry.details}
-                    </p>
+                    <details className="mt-4">
+                      <summary className="cursor-pointer text-sm font-semibold text-[#8b2332]">
+                        View inquiry details
+                      </summary>
+                      <p className="mt-3 whitespace-pre-wrap break-words text-sm leading-7 text-[#1a0b0f]/80">
+                        {inquiry.details}
+                      </p>
+                    </details>
                     <p className="mt-4 text-xs text-[#1a0b0f]/50">
                       Submitted{" "}
                       {new Intl.DateTimeFormat(undefined, {
@@ -301,8 +375,9 @@ export function AdminInquiries() {
                         timeStyle: "short",
                       }).format(new Date(inquiry.createdAt))}
                     </p>
-                  </article>
-                ))
+                    </article>
+                  );
+                })
               )}
             </div>
           </>
