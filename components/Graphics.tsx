@@ -1110,14 +1110,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Download, Moon, Plus, Sun, X,
 } from "lucide-react";
-
-/* ------------------------------------------------------------------
-   YOUR PORTFOLIO
-   1. Put your project images in /public/portfolio/ and fill `img` below,
-      e.g. img: "/portfolio/project-1.jpg". Until then a stock cover
-      photo is shown with a small "Sample" tag.
-   2. Put your PDF in /public/portfolio/ and change the file name here.
-------------------------------------------------------------------- */
+  
 const PORTFOLIO_PDF = "/portfolio/motive-house-portfolio.pdf";
 const EMAIL = "support@motivehouse.co";
 
